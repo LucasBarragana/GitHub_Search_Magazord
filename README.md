@@ -57,36 +57,11 @@ Testes Automatizados
 
 Adicionar testes unitários e de integração para garantir maior confiabilidade do código.
 
-## Estrutura do Projeto
-```
-.github-explorer/
-│-- api/
-│   ├── github.ts  # Funções para consumir a API do GitHub
-│
-│-- components/
-│   ├── Explorer.tsx  # Página de busca de repositórios
-│
-│-- hooks/
-│   ├── useGitHub.ts  # Hook para buscar repositórios e favoritos via SWR
-│
-│-- pages/
-│   ├── repositoriesList/page.tsx  # Listagem de repositórios com filtros e ordenação
-│
-│-- store/
-│   ├── githubStore.ts  # Zustand para armazenar repositórios e favoritos
-│
-│-- utils/
-│   ├── languageEmojis.ts  # Emojis para representar linguagens de programação
-│
-│-- public/imgs/
-│   ├── logo-magazord.png  # Logo da empresa
-│   ├── bussula.png  # Ícone de navegação
-```
 
 ## Como Rodar o Projeto
 1. Clone este repositório:
 ```bash
-git clone https://github.com/seu-usuario/github-explorer.git
+git clone https://github.com/LucasBarragana/github-explorer.git
 ```
 
 2. Acesse a pasta do projeto:

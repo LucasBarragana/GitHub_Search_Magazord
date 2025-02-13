@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Badge from '@/app/components/RepositoryList/Badge';
 import ListSection from '@/app/components/RepositoryList/ListenSection';
 
-interface Fork {
+type Fork = {
   id: number;
   html_url: string;
   full_name?: string;
@@ -26,21 +26,36 @@ export default function RepositoryDetails() {
   const { name } = params as { name: string };
   const { selectedRepo } = useGitHubStore();
 
+  const owner = selectedRepo?.owner?.login || '';
+
+  const { data: repo, error: repoError } = useSWR(
+    selectedRepo ? `https://api.github.com/repos/${owner}/${name}` : null,
+    fetcher
+  );
+  const { data: pulls, error: pullError } = useSWR(
+    selectedRepo ? `https://api.github.com/repos/${owner}/${name}/pulls` : null,
+    fetcher
+  );
+  const { data: issues, error: issueError } = useSWR(
+    selectedRepo ? `https://api.github.com/repos/${owner}/${name}/issues` : null,
+    fetcher
+  );
+  const { data: forks } = useSWR(
+    selectedRepo ? `https://api.github.com/repos/${owner}/${name}/forks` : null,
+    fetcher
+  );
+
   if (!selectedRepo) {
     return <p className="text-center text-gray-600">Não encontramos nenhum usuário com este nome.</p>;
   }
 
-  const owner = selectedRepo.owner.login;
-
-  const { data: repo, error: repoError } = useSWR(`https://api.github.com/repos/${owner}/${name}`, fetcher);
-  const { data: pulls, error: pullError } = useSWR(`https://api.github.com/repos/${owner}/${name}/pulls`, fetcher);
-  const { data: issues, error: issueError } = useSWR(`https://api.github.com/repos/${owner}/${name}/issues`, fetcher);
-  const { data: forks, error: forksError } = useSWR(`https://api.github.com/repos/${owner}/${name}/forks`, fetcher);
-
-  if (repoError || pullError || issueError) 
+  if (repoError || pullError || issueError) {
     return <p className="text-center text-red-500">Erro ao carregar os dados.</p>;
-  if (!repo) 
+  }
+
+  if (!repo) {
     return <p className="text-center text-gray-500">Carregando...</p>;
+  }
 
   return (
     <div className='relative bg-gray-100'>

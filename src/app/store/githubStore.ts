@@ -1,19 +1,37 @@
 import { create } from 'zustand';
 
-interface GitHubState {
-  repositories: any[];
-  starred: any[];
-  selectedRepo: any | null;
-  setRepositories: (repos: any[]) => void;
-  setStarred: (repos: any[]) => void;
-  setSelectedRepo: (repo: any) => void;
-}
+type Repository = {
+  id: number;
+  name: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
+  stargazers_count: number;
+  forks_count: number;
+  html_url: string;
+  language: string | null;
+  created_at: string;
+};
 
-export const useGitHubStore = create<GitHubState>((set) => ({
+type GitHubStore = {
+  username: string;
+  repositories: Repository[];
+  starredRepositories: Repository[];
+  selectedRepo: Repository | null;
+  setUsername: (username: string) => void;
+  setRepositories: (repos: Repository[]) => void;
+  setStarredRepositories: (repos: Repository[]) => void;
+  setSelectedRepo: (repo: Repository | null) => void;
+};
+
+export const useGitHubStore = create<GitHubStore>((set) => ({
+  username: '',
   repositories: [],
-  starred: [],
+  starredRepositories: [],
   selectedRepo: null,
-  setRepositories: (repos) => set({ repositories: repos }),
-  setStarred: (repos) => set({ starred: repos }),
-  setSelectedRepo: (repo) => set({ selectedRepo: repo }),
+  setUsername: (username: string) => set(() => ({ username })),
+  setRepositories: (repos: Repository[]) => set(() => ({ repositories: repos })),
+  setStarredRepositories: (repos: Repository[]) => set(() => ({ starredRepositories: repos })),
+  setSelectedRepo: (repo: Repository | null) => set(() => ({ selectedRepo: repo })),
 }));

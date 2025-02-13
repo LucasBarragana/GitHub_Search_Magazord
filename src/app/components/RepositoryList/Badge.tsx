@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 
-interface BadgeProps {
+type BadgeProps = {
   imgSrc: string;
   count: number;
   label: string;

@@ -20,7 +20,11 @@ export default function RepositoriesPage() {
   const userName = repositories.length > 0 ? repositories[0].owner.login : 'Usuário Desconhecido';
 
   const uniqueLanguages = useMemo(() => {
-    const languages = new Set(repositories.map((repo) => repo.language).filter(Boolean));
+    const languages = new Set(
+      repositories
+        .map((repo) => repo.language)
+        .filter((lang): lang is string => Boolean(lang)) // Remove valores falsy, incluindo null
+    );
     return Array.from(languages);
   }, [repositories]);
 
