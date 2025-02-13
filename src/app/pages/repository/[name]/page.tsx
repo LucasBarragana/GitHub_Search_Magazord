@@ -58,7 +58,7 @@ export default function RepositoryDetails() {
   }
 
   return (
-    <div className='relative bg-gray-100'>
+    <div className='relative bg-gray-100 text-gray-800'>
       <div className="absolute inset-0 opacity-10">
         <GitHubIcon />
       </div>
@@ -67,7 +67,7 @@ export default function RepositoryDetails() {
         <div className='flex justify-between mb-8'>
           <div className='font-semibold text-xl md:text-3xl flex gap-4'>
             <Image src='/imgs/bussula.png' width={24} height={24} alt='bussula' />
-            <p>GitHub_Explorer</p>             
+            <p className='text-gray-800'>GitHub_Explorer</p>             
           </div>
           <Link href="/pages/repositoriesList" className='flex items-center  text-gray-700 hover:text-gray-500'>
             <LeftArrow />

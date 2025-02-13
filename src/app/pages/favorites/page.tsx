@@ -10,7 +10,7 @@ export default function FavoritesPage() {
   const { starredRepositories } = useGitHubStore();
 
   return (
-    <div className="relative bg-gray-100 min-h-screen">
+    <div className="relative bg-gray-100 min-h-screen text-gray-800">
       <div className="absolute inset-0 opacity-10">
         <GitHubIcon />
       </div>
